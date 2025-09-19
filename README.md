@@ -105,4 +105,4 @@ Run `./scripts/create-disk.sh` to create the disk image.
 - Custom operating systems are actually pretty cool
 - The Steam Deck makes a surprisingly good development machine
 
-built with coffee, stubbornness, and way too much time spent debugging why GCC couldn't find its own files
+built with white monster, stubbornness, and way too much time spent debugging why GCC couldn't find its own files
