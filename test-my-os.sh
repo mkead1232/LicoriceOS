@@ -31,10 +31,11 @@ fi
 echo ""
 echo "[2/4] Creating root filesystem..."
 
-# Always rebuild rootfs to ensure consistency
-# if [ -d "$ROOTFS_DIR" ]; then
-#     sudo rm -rf "$ROOTFS_DIR" 
-# fi
+# In test-my-os.sh, add this check:
+if [ ! -d "$ROOTFS_DIR" ] || [ ! -f "$ROOTFS_DIR/bin/gcc" ]; then
+    echo "Rootfs missing or incomplete. Rebuilding..."
+    ./scripts/copy-binaries.sh
+fi
 
 # Create directory structure
 mkdir -p "$ROOTFS_DIR"/{bin,sbin,etc,proc,sys,dev,tmp,var,lib,usr/{bin,sbin},root,mnt}
