@@ -169,13 +169,42 @@ if grep -q Microsoft /proc/version 2>/dev/null; then
     echo ""
 fi
 
+# Step 4: Determine which kernel to use
+echo ""
+echo "[4/4] Starting QEMU test..."
+
+# Auto-detect which kernel to use
+KERNEL_FILE=""
+if [ -f "$BUILD_DIR/bzImage-custom" ]; then
+    KERNEL_FILE="$BUILD_DIR/bzImage-custom"
+    echo "Using custom built kernel"
+elif [ -f "$BUILD_DIR/bzImage" ]; then
+    KERNEL_FILE="$BUILD_DIR/bzImage"
+    echo "Using downloaded kernel"
+else
+    echo "Error: No kernel found!"
+    exit 1
+fi
+
+echo "Kernel: $KERNEL_FILE"
+
+
 qemu-system-x86_64 \
-  -kernel build/bzImage-custom \
-  -initrd build/initramfs.cpio.gz \
-  -append "console=ttyS0 init=/init quiet" \
-  -m 1024M \
-  -drive file=build/persistent-disk.img,format=raw,if=ide \
-  -nographic
+    -kernel "$KERNEL_FILE" \
+    -initrd "$BUILD_DIR/initramfs.cpio.gz" \
+    -append "console=tty1 init=/init quiet loglevel=3" \
+    -display gtk \
+    -hda build/persistent-disk.img \
+    -m 1024M \
+    -smp 2 \
+    -enable-kvm 2>/dev/null || qemu-system-x86_64 \
+    -kernel "$KERNEL_FILE" \
+    -initrd "$BUILD_DIR/initramfs.cpio.gz" \
+    -append "console=tty1 init=/init quiet loglevel=3" \
+    -display gtk \
+    -hda build/persistent-disk.img \
+    -m 1024M \
+    -smp 2
 
 echo ""
 echo "=== QEMU SESSION ENDED ==="
