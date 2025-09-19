@@ -107,5 +107,3 @@ Run `./scripts/create-disk.sh` to create the disk image.
 - GCC has a lot of dependencies you don't think about
 - Custom operating systems are actually pretty cool
 - The Steam Deck makes a surprisingly good development machine
-
-built with white monster, stubbornness, and way too much time spent debugging why GCC couldn't find its own files
