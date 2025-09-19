@@ -4,7 +4,7 @@ An "Operating System*" i made in half a week.
 *it's basically just Linux with a custom init program but hey it boots and runs GCC
 
 ## what is this
-I built this on my Steam Deck using WSL Ubuntu because why not. It's a minimal Linux-based OS that can:
+I built this on my Steam Deck for a bit, then used WSL Ubuntu because yes. It's a minimal Linux-based OS that can:
 - Boot in QEMU (or real hardware if you're brave)
 - Compile and run C programs with GCC
 - Save files that survive reboots
