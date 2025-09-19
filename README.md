@@ -98,6 +98,9 @@ Make sure you have at least 1GB free RAM and your CPU supports virtualization.
 **"No persistent disk found"**
 Run `./scripts/create-disk.sh` to create the disk image.
 
+## why
+- my friend joel thought it would be cool to make an os
+
 ## what i learned
 - PID 1 is special and you have to handle it carefully
 - Copying an entire Linux userland is harder than it looks
