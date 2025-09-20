@@ -1,5 +1,19 @@
 #!/bin/bash
 
+# At the top of copy-binaries.sh, add:
+detect_distro() {
+    if [ -f /etc/arch-release ]; then
+        echo "arch"
+    elif [ -f /etc/debian_version ]; then
+        echo "debian"
+    else
+        echo "unknown"
+    fi
+}
+
+DISTRO=$(detect_distro)
+echo "Detected distribution: $DISTRO"
+
 # copy-binaries.sh - Copy essential Linux commands and complete GCC toolchain
 set -e
 
