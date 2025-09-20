@@ -21,19 +21,35 @@ I built this on my Steam Deck for a bit, then used WSL Ubuntu because yes. It's 
 ## getting started
 
 ### requirements
-- WSL Ubuntu (or any Linux really)
+- Any Linux distro (WSL Ubuntu, Arch, Debian, etc.)
 - A computer that can run QEMU
 - Some patience for the initial setup
 
-### setup
+### dependencies to install
+
+**Arch Linux:**
 ```bash
-git clone <this-repo>
-cd licoriceOS
-chmod +x setup.sh
-./setup.sh
+sudo pacman -S base-devel qemu-system-x86 grub xorriso cdrtools wget cpio gzip
 ```
 
-This will install dependencies, copy Linux binaries, and set up your development environment. It takes a few minutes because it's copying like half of Ubuntu into your OS.
+**Ubuntu/Debian/WSL:**
+```bash
+sudo apt install build-essential gcc g++ libc6-dev qemu-system-x86 grub-mkrescue grub2-common xorriso mtools wget cpio gzip
+```
+
+**Other distros:** Install equivalent packages for build tools, QEMU, and GRUB.
+
+### setup
+```bash
+git clone https://github.com/mkead1232/LicoriceOS
+cd LicoriceOS
+chmod +x scripts/*.sh test-my-os.sh
+./scripts/copy-binaries.sh
+./scripts/create-disk.sh
+./scripts/expand-disk.sh
+```
+
+This copies Linux binaries from your system and sets up the development environment. Takes a few minutes because it's copying like half of your distro into your OS.
 
 ### running your os
 ```bash
@@ -78,11 +94,13 @@ The "OS" is really just a Linux kernel with a custom initramfs containing your i
 - I built this in like 4 days so expect weird bugs
 - It's not actually a "real" OS but it's close enough
 
-## dependencies that get installed
-- build-essential (GCC, make, etc.)
-- qemu-system-x86 (to run your OS)
-- grub-mkrescue (to make ISOs)
-- A bunch of other stuff the setup script handles
+## distro-specific notes
+
+**Arch Linux:** Your system probably has newer versions of everything, which is good. GCC might be in a different version directory.
+
+**WSL Ubuntu:** Works great, just make sure you have WSL 2 for proper virtualization support.
+
+**Other distros:** The copy script adapts to your system's layout automatically. If something breaks, it's probably a path issue - check where your distro puts GCC.
 
 ## troubleshooting
 
